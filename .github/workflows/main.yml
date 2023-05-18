@@ -1,0 +1,37 @@
+name: onpush
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+
+  # Allows running this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out repository under $GITHUB_WORKSPACE, so job can access it
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          # This data can be any valid JSON from a previous step in the GitHub Action
+            payload: |
+              {
+                "key": "New File is Updated",
+                "Action": "Future action will be taken"
+                }
+        env:
+          SLACK_WEBHOOK_URL: ${{ "https://hooks.slack.com/services/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" }}
