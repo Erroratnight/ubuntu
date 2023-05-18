@@ -34,4 +34,4 @@ jobs:
                 "Action": "Future action will be taken"
                 }
         env:
-          SLACK_WEBHOOK_URL: ${{ "https://hooks.slack.com/services/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" }}
+          SLACK_WEBHOOK_URL: ${{ "https:${{ secrets.SLACK_WEBHOOK_URL }
